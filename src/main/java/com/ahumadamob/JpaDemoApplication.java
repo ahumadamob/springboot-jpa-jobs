@@ -1,5 +1,7 @@
 package com.ahumadamob;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +23,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		//System.out.println(repo);
-		saveCategory();
+		//saveCategory();
+		getCategoryById();
 		
 	}
 	
@@ -31,6 +34,16 @@ public class JpaDemoApplication implements CommandLineRunner {
 		category.setDescription("Categoría relacionada con las finanzas y la contabilidad");
 		repo.save(category);
 		System.out.println(category);
+	}
+	
+	private void getCategoryById() {
+		Optional<Category> opt = repo.findById(2);
+		if(opt.isPresent()) {
+			System.out.println(opt.get());
+		}else {
+			System.out.println("Objeto no encontrado");
+		}
+			
 	}
 
 }
