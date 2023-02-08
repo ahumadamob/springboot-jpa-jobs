@@ -32,7 +32,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 		//deleteAll();
 		//countCategories();
 		//findAllById();
-		findAllCategories();
+		//findAllCategories();
+		existCategoryById();
 		
 	}
 	
@@ -97,6 +98,12 @@ public class JpaDemoApplication implements CommandLineRunner {
 		for(Category elm : categories) {
 			System.out.println(elm);
 		}
+	}
+	
+	private void existCategoryById() {
+		boolean exists = repo.existsById(99);
+		System.out.println("La categoría existe? " + exists);
+		
 	}
 
 }
