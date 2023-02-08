@@ -33,7 +33,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 		//countCategories();
 		//findAllById();
 		//findAllCategories();
-		existCategoryById();
+		//existCategoryById();
+		saveAllCategories();
 		
 	}
 	
@@ -104,6 +105,33 @@ public class JpaDemoApplication implements CommandLineRunner {
 		boolean exists = repo.existsById(99);
 		System.out.println("La categoría existe? " + exists);
 		
+	}
+	
+	private void saveAllCategories() {
+		
+		repo.saveAll(getCategoryList());
+	}
+	
+	private List<Category> getCategoryList(){
+		List<Category> categories = new LinkedList<Category>();
+		
+		Category cat1 = new Category();
+		cat1.setName("Bonus Track 1");
+		cat1.setDescription("Categoría añadida 1");
+		
+		Category cat2 = new Category();
+		cat2.setName("Bonus Track 2");
+		cat2.setDescription("Categoría añadida 2");
+		
+		Category cat3 = new Category();
+		cat3.setName("Bonus Track 3");
+		cat3.setDescription("Categoría añadida 3");	
+		
+		categories.add(cat1);
+		categories.add(cat2);
+		categories.add(cat3);
+		
+		return categories;
 	}
 
 }
