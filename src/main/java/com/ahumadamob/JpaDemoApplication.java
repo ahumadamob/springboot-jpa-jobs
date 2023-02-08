@@ -24,7 +24,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		//System.out.println(repo);
 		//saveCategory();
-		getCategoryById();
+		//getCategoryById();
+		updateCategory();
 		
 	}
 	
@@ -43,7 +44,18 @@ public class JpaDemoApplication implements CommandLineRunner {
 		}else {
 			System.out.println("Objeto no encontrado");
 		}
-			
 	}
+	
+	private void updateCategory() {
+		Optional<Category> opt = repo.findById(1);
+		if(opt.isPresent()) {
+			Category categoryUpdate = opt.get();
+			categoryUpdate.setName("Ingeniería de Software");
+			categoryUpdate.setDescription("Desarrollo de Sistemas");
+			repo.save(categoryUpdate);
+		}else {
+			System.out.println("Objeto no encontrado");
+		}
+	}	
 
 }
