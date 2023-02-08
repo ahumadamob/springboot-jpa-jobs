@@ -26,7 +26,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 		//saveCategory();
 		//getCategoryById();
 		//updateCategory();
-		deleteCategory();
+		//deleteCategory();
+		countCategories();
 		
 	}
 	
@@ -64,5 +65,10 @@ public class JpaDemoApplication implements CommandLineRunner {
 		repo.deleteById(idCategoria);
 		//TODO: Acá hay que aplicar try catch porque si eliminamos uno que no existe da una excepción
 	}	
+	
+	private void countCategories() {
+		Long count = repo.count();
+		System.out.println("Total categorias: " + count);
+	}
 
 }
