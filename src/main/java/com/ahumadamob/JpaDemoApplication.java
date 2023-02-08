@@ -1,5 +1,7 @@
 package com.ahumadamob;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,10 @@ public class JpaDemoApplication implements CommandLineRunner {
 		//getCategoryById();
 		//updateCategory();
 		//deleteCategory();
-		countCategories();
+		//deleteAll();
+		//countCategories();
+		//findAllById();
+		findAllCategories();
 		
 	}
 	
@@ -69,6 +74,29 @@ public class JpaDemoApplication implements CommandLineRunner {
 	private void countCategories() {
 		Long count = repo.count();
 		System.out.println("Total categorias: " + count);
+	}
+	
+	private void deleteAll() {
+		repo.deleteAll();
+	}
+	
+	private void findAllCategoriesById() {
+		List<Integer> ids = new LinkedList<Integer>();
+		ids.add(1);
+		ids.add(4);
+		ids.add(10);
+		repo.findAllById(ids);
+		Iterable<Category> categories = repo.findAllById(ids);
+		for(Category elm : categories) {
+			System.out.println(elm);
+		}
+	}
+	
+	private void findAllCategories() {
+		Iterable<Category> categories =	repo.findAll();
+		for(Category elm : categories) {
+			System.out.println(elm);
+		}
 	}
 
 }
