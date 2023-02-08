@@ -25,7 +25,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 		//System.out.println(repo);
 		//saveCategory();
 		//getCategoryById();
-		updateCategory();
+		//updateCategory();
+		deleteCategory();
 		
 	}
 	
@@ -56,6 +57,12 @@ public class JpaDemoApplication implements CommandLineRunner {
 		}else {
 			System.out.println("Objeto no encontrado");
 		}
+	}
+	
+	private void deleteCategory() {
+		int idCategoria = 1;
+		repo.deleteById(idCategoria);
+		//TODO: Acá hay que aplicar try catch porque si eliminamos uno que no existe da una excepción
 	}	
 
 }
