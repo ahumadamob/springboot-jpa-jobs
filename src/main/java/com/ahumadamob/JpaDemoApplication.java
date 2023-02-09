@@ -41,7 +41,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 		//findAllCategoriesJPA();
 		//deleteAllInBatch();
 		//findAllCategoriesOrderByJPA();
-		findAllCategoriesPagination();
+		findAllCategoriesPaginationOrder();
 		
 	}
 	
@@ -167,5 +167,15 @@ public class JpaDemoApplication implements CommandLineRunner {
 			System.out.println(elm.getId() + " " + elm.getName());
 		}
 	}
+	
+	
+	private void findAllCategoriesPaginationOrder() {
+		Page<Category> page = repo.findAll(PageRequest.of(2, 5, Sort.by("name")));
+		System.out.println("Total registros: " + page.getTotalElements());
+		System.out.println("Total páginas: " + page.getTotalPages());
+		for(Category elm: page) {
+			System.out.println(elm.getId() + " " + elm.getName());
+		}
+	}	
 
 }
