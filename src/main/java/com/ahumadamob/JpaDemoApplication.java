@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import com.ahumadamob.model.Category;
 import com.ahumadamob.repository.CategoryRepository;
@@ -34,7 +37,11 @@ public class JpaDemoApplication implements CommandLineRunner {
 		//findAllById();
 		//findAllCategories();
 		//existCategoryById();
-		saveAllCategories();
+		//saveAllCategories();
+		//findAllCategoriesJPA();
+		//deleteAllInBatch();
+		//findAllCategoriesOrderByJPA();
+		findAllCategoriesPagination();
 		
 	}
 	
@@ -132,6 +139,33 @@ public class JpaDemoApplication implements CommandLineRunner {
 		categories.add(cat3);
 		
 		return categories;
+	}
+	
+	private void findAllCategoriesJPA() {
+		List<Category> categories =  repo.findAll();
+		for(Category elm: categories) {
+			System.out.println(elm.getId() + " " + elm.getName());
+		}
+	}
+	
+	private void deleteAllInBatch() {
+		repo.deleteAllInBatch();
+	}
+	
+	private void findAllCategoriesOrderByJPA() {
+		List<Category> categories =  repo.findAll(Sort.by("name").descending());
+		for(Category elm: categories) {
+			System.out.println(elm.getId() + " " + elm.getName());
+		}		
+	}
+	
+	private void findAllCategoriesPagination() {
+		Page<Category> page = repo.findAll(PageRequest.of(2, 5));
+		System.out.println("Total registros: " + page.getTotalElements());
+		System.out.println("Total páginas: " + page.getTotalPages());
+		for(Category elm: page) {
+			System.out.println(elm.getId() + " " + elm.getName());
+		}
 	}
 
 }
